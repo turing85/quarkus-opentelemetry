@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+storage:
+  tsdb:
+    out_of_order_time_window: 10m
+scrape_configs:
+  - job_name: 'apps'
+    metrics_path: '/q/metrics'
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - 'host.docker.internal:8080'
+          - 'host.docker.internal:9080'

@@ -1,11 +1,11 @@
 services:
-  jaeger-all-in-one:
-    image: docker.io/jaegertracing/all-in-one:1.64.0@sha256:7e9591218e7ddd51e568ef892e3ea190ae420ecf97c4d718910a3f57e076c216
+  lgtm:
+    image: docker.io/grafana/otel-lgtm:0.8.1@sha256:a4786717c4b29705e6464e2e82196fcb925de3c7f1970e923d8becac4ffd0c2a
     ports:
-      - "16686:16686" # Jaeger UI
-      - "14268:14268" # Receive legacy OpenTracing traces, optional
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
-      - "14250:14250" # Receive from external otel-collector, optional
-    environment:
-      - COLLECTOR_OTLP_ENABLED=true
+      - "3000:3000"
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - ./lgtm/otel-lgtm/prometheus.yaml:/otel-lgtm/prometheus.yaml:ro
+      - ./lgtm/otel-lgtm/grafana-dashboard-red-metrics-classic.json:/otel-lgtm/grafana-dashboard-red-metrics-classic.json:ro
+
