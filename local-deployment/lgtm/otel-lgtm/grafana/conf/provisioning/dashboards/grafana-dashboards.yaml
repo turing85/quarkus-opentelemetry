@@ -4,5 +4,10 @@ providers:
   - name: 'Dashboard for Micrometer instrumented applications in Quarkus using the Prometheus registry'
     type: file
     options:
-      path: /otel-lgtm/grafana-dashboard-quarkus-micrometer-metrics.json
+      path: /otel-lgtm/dashboards/grafana-dashboard-quarkus-micrometer-metrics.json
+      foldersFromFilesStructure: false
+  - name: 'Universal and flexible dashboard for logging'
+    type: file
+    options:
+      path: /otel-lgtm/dashboards/grafana-dashboard-logging.json
       foldersFromFilesStructure: false
