@@ -7,5 +7,5 @@ services:
       - "4318:4318"
     volumes:
       - ./lgtm/otel-lgtm/prometheus.yaml:/otel-lgtm/prometheus.yaml:ro
-      - ./lgtm/otel-lgtm/grafana-dashboard-red-metrics-classic.json:/otel-lgtm/grafana-dashboard-red-metrics-classic.json:ro
-
+      - ./lgtm/otel-lgtm/grafana/conf/provisioning/dashboards/:/otel-lgtm/grafana/conf/provisioning/dashboards/:ro
+      - ./lgtm/otel-lgtm/grafana-dashboard-quarkus-micrometer-metrics.json:/otel-lgtm/grafana-dashboard-quarkus-micrometer-metrics.json:ro
