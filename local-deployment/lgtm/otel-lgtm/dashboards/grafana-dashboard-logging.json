@@ -228,7 +228,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "{service_name=~\"$service_name\"} |~ \"(?i)$searchable_pattern\" | line_format `{{date \"2006-01-02 12:04:05\" __timestamp__ | alignLeft 21}} {{alignLeft 30 .service_name}} {{upper .detected_level | alignLeft 9}} {{__line__}}`",
+          "expr": "{service_name=~\"$service_name\"} | severity_text=~\"$log_level\" |~ \"(?i)$searchable_pattern\" | line_format `{{date \"2006-01-02 12:04:05\" __timestamp__ | alignLeft 21}} {{alignLeft 30 .service_name}} {{upper .detected_level | alignLeft 9}} {{__line__}}`",
           "hide": false,
           "queryType": "range",
           "refId": "A"
@@ -329,7 +329,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum (count_over_time(({service_name=\"$service_name\"} | label_format level=detected_level)[$__interval])) by (level)",
+          "expr": "sum (count_over_time(({service_name=~\"$service_name\"} | label_format level=detected_level)[$__interval])) by (level)",
           "hide": false,
           "legendFormat": "{{stream}}",
           "queryType": "range",
@@ -397,7 +397,7 @@
             "uid": "loki"
           },
           "editorMode": "code",
-          "expr": "sum (count_over_time(({service_name=\"$service_name\"} | label_format level=detected_level |~ \"(?i)$searchable_pattern\")[$__interval])) by (level)",
+          "expr": "sum (count_over_time(({service_name=~\"$service_name\"} | label_format level=detected_level |~ \"(?i)$searchable_pattern\")[$__interval])) by (level)",
           "legendFormat": "{{pod}}",
           "queryType": "range",
           "refId": "A"
@@ -829,7 +829,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "1m",
+  "refresh": "10s",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
@@ -839,10 +839,11 @@
   "templating": {
     "list": [
       {
+        "allValue": ".+",
         "current": {
-          "selected": false,
-          "text": "quarkus-opentelemetry-ping",
-          "value": "quarkus-opentelemetry-ping"
+          "selected": true,
+          "text": "ALL",
+          "value": ".+"
         },
         "datasource": {
           "type": "loki",
@@ -850,9 +851,9 @@
         },
         "definition": "",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Service",
-        "multi": false,
+        "multi": true,
         "name": "service_name",
         "options": [],
         "query": {
@@ -868,10 +869,59 @@
         "type": "query"
       },
       {
+        "allValue": ".+",
         "current": {
-          "selected": false,
-          "text": "error",
-          "value": "error"
+          "text": [
+            "ERROR"
+          ],
+          "value": [
+            "ERROR"
+          ]
+        },
+        "includeAll": true,
+        "label": "Log Level",
+        "multi": true,
+        "name": "log_level",
+        "options": [
+          {
+            "selected": false,
+            "text": "FATAL",
+            "value": "FATAL"
+          },
+          {
+            "selected": true,
+            "text": "ERROR",
+            "value": "ERROR"
+          },
+          {
+            "selected": false,
+            "text": "WARN",
+            "value": "WARN"
+          },
+          {
+            "selected": false,
+            "text": "INFO",
+            "value": "INFO"
+          },
+          {
+            "selected": false,
+            "text": "DEBUG",
+            "value": "DEBUG"
+          },
+          {
+            "selected": false,
+            "text": "TRACE",
+            "value": "TRACE"
+          }
+        ],
+        "query": "FATAL,ERROR,WARN,INFO,DEBUG,TRACE",
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "",
+          "value": ""
         },
         "hide": 0,
         "label": "Search (case insensitive)",
@@ -890,7 +940,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {

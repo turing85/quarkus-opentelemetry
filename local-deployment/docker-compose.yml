@@ -8,4 +8,5 @@ services:
     volumes:
       - ./lgtm/otel-lgtm/prometheus.yaml:/otel-lgtm/prometheus.yaml:ro
       - ./lgtm/otel-lgtm/grafana/conf/provisioning/dashboards/:/otel-lgtm/grafana/conf/provisioning/dashboards/:ro
+      - ./lgtm/otel-lgtm/grafana/conf/provisioning/datasources/:/otel-lgtm/grafana/conf/provisioning/datasources/:ro
       - ./lgtm/otel-lgtm/dashboards/:/otel-lgtm/dashboards/:ro
