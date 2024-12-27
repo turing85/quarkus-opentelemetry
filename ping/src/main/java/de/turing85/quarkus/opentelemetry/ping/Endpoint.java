@@ -17,7 +17,6 @@ import io.quarkiverse.reactive.messaging.nats.jetstream.client.api.PublishMessag
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
-import lombok.extern.log4j.Log4j2;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.Message;
@@ -26,7 +25,6 @@ import org.eclipse.microprofile.reactive.messaging.Metadata;
 @Path(Endpoint.PATH)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Log4j2
 public class Endpoint {
   public static final String PATH = "numbers";
   private final NumberRepository numberRepository;
