@@ -842,8 +842,12 @@
         "allValue": ".+",
         "current": {
           "selected": true,
-          "text": "ALL",
-          "value": ".+"
+          "text": [
+            "All"
+          ],
+          "value": [
+            ".+"
+          ]
         },
         "datasource": {
           "type": "loki",
@@ -872,10 +876,10 @@
         "allValue": ".+",
         "current": {
           "text": [
-            "ERROR"
+            "All"
           ],
           "value": [
-            "ERROR"
+            ".+"
           ]
         },
         "includeAll": true,
@@ -933,7 +937,7 @@
             "value": ""
           }
         ],
-        "query": "error",
+        "query": "",
         "skipUrlSync": false,
         "type": "textbox"
       }
